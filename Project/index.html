@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraSaaS - High Performance Analytics Dashboard</title>
+  
+  <!-- Custom design system styles -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Chart.js and Lucide Icons CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div id="app-container">
+    
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-wrapper">
+          <div class="logo-icon">
+            <i data-lucide="layers"></i>
+          </div>
+          <span class="logo-text">AuraSaaS</span>
+        </div>
+        <button class="collapse-btn" id="sidebar-toggle" title="Toggle Sidebar">
+          <i data-lucide="chevron-left" id="toggle-icon"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-link active">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-link">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Analytics</span>
+        </a>
+        <a href="#" class="nav-link">
+          <i data-lucide="users"></i>
+          <span>Team Members</span>
+        </a>
+        <a href="#" class="nav-link">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" alt="Sarah Jenkins" onerror="window.replaceWithFallbackAvatar(this, 'Sarah Jenkins', 'Admin')">
+          <div class="user-snippet-info">
+            <span class="user-snippet-name">Sarah Jenkins</span>
+            <span class="user-snippet-role">Administrator</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT PANEL ==================== -->
+    <main id="main-panel">
+      
+      <!-- Top Bar Utilities -->
+      <header id="topbar">
+        <div style="display: flex; align-items: center;">
+          <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Open Navigation">
+            <i data-lucide="menu"></i>
+          </button>
+          
+          <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" class="global-search" id="global-search-bar" placeholder="Search resources, events...">
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <!-- Theme Toggle Button -->
+          <button class="action-btn-circle" id="theme-toggle-btn" title="Toggle Theme">
+            <i data-lucide="sun" id="theme-toggle-icon"></i>
+          </button>
+
+          <!-- Notification Bell -->
+          <button class="action-btn-circle" id="notif-bell-btn" title="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notif-badge" id="notif-badge-dot"></span>
+          </button>
+          
+          <!-- Notification Dropdown Panel -->
+          <div class="notif-dropdown" id="notification-dropdown">
+            <div class="notif-dropdown-header">
+              <h4>Notifications</h4>
+              <button class="mark-read-btn" id="mark-all-read-btn">Mark all read</button>
+            </div>
+            <div class="notif-list" id="notifications-list-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- User Dropdown Trigger -->
+          <div class="profile-menu-trigger" id="profile-trigger">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" class="profile-menu-avatar" alt="Sarah Jenkins" onerror="window.replaceWithFallbackAvatar(this, 'Sarah Jenkins', 'Admin')">
+            <i data-lucide="chevron-down" class="profile-menu-chevron"></i>
+          </div>
+
+          <!-- User Profile Dropdown Menu -->
+          <div class="profile-dropdown" id="profile-dropdown-menu">
+            <div class="profile-dropdown-user">
+              <div class="profile-dropdown-user-name">Sarah Jenkins</div>
+              <div class="profile-dropdown-user-email">sarah.j@analytics.io</div>
+            </div>
+            <a href="#" class="profile-dropdown-item"><i data-lucide="user" style="width: 16px; height: 16px;"></i> My Profile</a>
+            <a href="#" class="profile-dropdown-item"><i data-lucide="credit-card" style="width: 16px; height: 16px;"></i> Billing & Plans</a>
+            <a href="#" class="profile-dropdown-item"><i data-lucide="shield" style="width: 16px; height: 16px;"></i> Security Settings</a>
+            <a href="#" class="profile-dropdown-item logout"><i data-lucide="log-out" style="width: 16px; height: 16px;"></i> Sign Out</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Container -->
+      <div class="content-scrollable">
+        
+        <!-- Welcome Summary header -->
+        <section class="dashboard-summary-header">
+          <div class="dashboard-title-area">
+            <h2>Analytics Overview</h2>
+            <p>Welcome back, Sarah. Monitor performance metrics and team permissions here.</p>
+          </div>
+          <div class="live-indicator-wrapper">
+            <div class="pulse-dot"></div>
+            <span>LIVE SYSTEM FEED</span>
+          </div>
+        </section>
+
+        <!-- Main Dashboard Dashboard Grid -->
+        <div class="dashboard-grid">
+          
+          <!-- Metric Card 1: Revenue (Indigo Accent) -->
+          <div class="panel metric-card">
+            <div class="metric-card-header">
+              <span>MONTHLY REVENUE</span>
+              <div class="metric-card-icon indigo">
+                <i data-lucide="dollar-sign"></i>
+              </div>
+            </div>
+            <div>
+              <div class="metric-card-value" id="stats-revenue">$142,500</div>
+              <div class="metric-card-footer">
+                <span class="metric-trend up"><i data-lucide="trending-up" style="width: 14px; height: 14px;"></i> +11.4%</span>
+                <span class="metric-trend-label">vs last month</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metric Card 2: Customers (Cyan Accent) -->
+          <div class="panel metric-card">
+            <div class="metric-card-header">
+              <span>TOTAL CUSTOMERS</span>
+              <div class="metric-card-icon cyan">
+                <i data-lucide="users-round"></i>
+              </div>
+            </div>
+            <div>
+              <div class="metric-card-value" id="stats-acquisition">4,812</div>
+              <div class="metric-card-footer">
+                <span class="metric-trend up"><i data-lucide="trending-up" style="width: 14px; height: 14px;"></i> +8.7%</span>
+                <span class="metric-trend-label">vs last month</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metric Card 3: Avg Latency (Amber Accent) -->
+          <div class="panel metric-card">
+            <div class="metric-card-header">
+              <span>SERVER LATENCY</span>
+              <div class="metric-card-icon amber">
+                <i data-lucide="activity"></i>
+              </div>
+            </div>
+            <div>
+              <div class="metric-card-value" id="stats-latency">48ms</div>
+              <div class="metric-card-footer">
+                <span class="metric-trend down"><i data-lucide="trending-down" style="width: 14px; height: 14px;"></i> -4.2%</span>
+                <span class="metric-trend-label">better optimization</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metric Card 4: Uptime Status (Emerald Accent) -->
+          <div class="panel metric-card">
+            <div class="metric-card-header">
+              <span>SYSTEM UPTIME</span>
+              <div class="metric-card-icon emerald">
+                <i data-lucide="server"></i>
+              </div>
+            </div>
+            <div>
+              <div class="metric-card-value" id="stats-uptime">99.98%</div>
+              <div class="metric-card-footer">
+                <span class="metric-trend up"><i data-lucide="check" style="width: 14px; height: 14px;"></i> Active</span>
+                <span class="metric-trend-label">all clusters green</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Component A: Chart 1 Hero (Line/Area Chart) -->
+          <div class="panel col-3" style="padding: 24px;">
+            <div class="chart-panel-header">
+              <div class="chart-panel-title-area">
+                <h3>Revenue Growth vs. Customer Acquisition</h3>
+                <p>12-month trailing comparison statistics</p>
+              </div>
+              <div class="chart-series-toggles">
+                <button class="chart-toggle-pill active" data-series="revenue">
+                  <span class="chart-toggle-dot"></span>
+                  <span>Revenue ($k)</span>
+                </button>
+                <button class="chart-toggle-pill active" data-series="acquisition">
+                  <span class="chart-toggle-dot"></span>
+                  <span>Acquisitions</span>
+                </button>
+              </div>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="revenueGrowthChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Component A: Chart 2 Secondary (Donut Chart) -->
+          <div class="panel col-1" style="padding: 24px;">
+            <div class="chart-panel-header" style="margin-bottom: 12px;">
+              <div class="chart-panel-title-area">
+                <h3>Traffic Sources</h3>
+                <p>Visitor acquisition channels</p>
+              </div>
+            </div>
+            <div class="donut-layout">
+              <div class="donut-chart-wrapper">
+                <canvas id="trafficBreakdownChart"></canvas>
+              </div>
+              <div class="donut-legend" id="donut-legend-container">
+                <!-- Dynamically populated from JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Component B: User Management (RBAC) -->
+          <div class="panel col-3 user-panel">
+            <div class="user-panel-header">
+              <div class="chart-panel-title-area">
+                <h3>Team Management</h3>
+                <p>Manage member roles and system permissions level</p>
+              </div>
+              <div class="user-table-actions">
+                <!-- Dropdown role filter -->
+                <select class="filter-dropdown" id="role-filter-select">
+                  <option value="all">All Roles</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Editor">Editor</option>
+                  <option value="Viewer">Viewer</option>
+                </select>
+                <!-- Search bar input -->
+                <div class="table-search-wrapper">
+                  <i data-lucide="search"></i>
+                  <input type="text" class="table-search" id="member-search-bar" placeholder="Search members...">
+                </div>
+              </div>
+            </div>
+
+            <!-- Members table list -->
+            <div class="table-responsive">
+              <table class="members-table">
+                <thead>
+                  <tr>
+                    <th>User Profile</th>
+                    <th>Role Privilege</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="members-table-body">
+                  <!-- Dynamically populated from JS -->
+                </tbody>
+              </table>
+              <div class="table-empty-state" id="table-empty" style="display: none;">
+                <i data-lucide="search-code"></i>
+                <p>No team members matching filter criteria found.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Component C: Real-Time Mock Operations Feed -->
+          <div class="panel col-1 feed-panel" style="padding: 24px;">
+            <div class="feed-header">
+              <h3>
+                <i data-lucide="terminal" style="color: var(--color-indigo);"></i>
+                <span>Live Event Stream</span>
+              </h3>
+              <div class="pulse-dot"></div>
+            </div>
+            <div class="feed-items-container" id="feed-items-list">
+              <!-- Dynamically populated items -->
+            </div>
+          </div>
+
+        </div> <!-- Grid End -->
+
+        <!-- Clean Copyright Footer Section -->
+        <footer class="dashboard-footer-bar">
+          <span>&copy; 2026 Faisal Khan. All rights reserved.</span>
+          <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <span class="footer-divider">&bull;</span>
+            <a href="#">Terms of Service</a>
+            <span class="footer-divider">&bull;</span>
+            <a href="#">Support Hub</a>
+          </div>
+        </footer>
+
+      </div> <!-- Content Scroll Area End -->
+    </main>
+  </div>
+
+  <!-- Script Declarations -->
+  <script src="mockData.js"></script>
+  <script src="charts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
